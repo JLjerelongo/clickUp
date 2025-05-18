@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ClickUp Game</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #f0f0f0;
+    }
+    .card {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      max-width: 500px;
+      margin: auto;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+    .question {
+      font-size: 20px;
+      margin-bottom: 15px;
+    }
+    .options {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+    .button {
+      padding: 10px;
+      background: #4f46e5;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    .button:hover {
+      background: #3730a3;
+    }
+    .score {
+      text-align: center;
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card" id="game">
+    <!-- El contenido del juego se inyecta por JavaScript -->
+  </div>
+
+  <script>
+    const questions = [
+      {
+        question: '¿Para qué se usa ClickUp?',
+        options: ['Gestión de proyectos', 'Edición de videos', 'Diseño gráfico', 'Marketing digital'],
+        answer: 'Gestión de proyectos'
+      },
+      {
+        question: '¿Cuál de estas funcionalidades tiene ClickUp?',
+        options: ['Creación de documentos', 'Edición de código', 'Producción musical', 'Animación 3D'],
+        answer: 'Creación de documentos'
+      },
+      {
+        question: '¿ClickUp permite gestionar tareas en estilo Kanban?',
+        options: ['Sí', 'No'],
+        answer: 'Sí'
+      },
+      {
+        question: '¿Qué metodología soporta ClickUp?',
+        options: ['Scrum', 'Cascada', 'Agile', 'Todas las anteriores'],
+        answer: 'Todas las anteriores'
+      }
+    ];
+
+    let currentQuestion = 0;
+    let score = 0;
+
+    const gameDiv = document.getElementById('game');
+
+    function renderQuestion() {
+      const q = questions[currentQuestion];
+      gameDiv.innerHTML = `
+        <div class="question">${q.question}</div>
+        <div class="options">
+          ${q.options.map((opt, i) => `<button class="button" onclick="handleAnswer('${opt}')">${opt}</button>`).join('')}
+        </div>
+      `;
+    }
+
+    function handleAnswer(selected) {
+      if (selected === questions[currentQuestion].answer) {
+        score++;
+      }
+      currentQuestion++;
+      if (currentQuestion < questions.length) {
+        renderQuestion();
+      } else {
+        renderResult();
+      }
+    }
+
+    function renderResult() {
+      gameDiv.innerHTML = `
+        <div class="question">Juego terminado 🎉</div>
+        <p class="score">Tu puntaje: ${score} / ${questions.length}</p>
+        <button class="button" onclick="resetGame()">Jugar de nuevo</button>
+      `;
+    }
+
+    function resetGame() {
+      currentQuestion = 0;
+      score = 0;
+      renderQuestion();
+    }
+
+    // Iniciar el juego
+    renderQuestion();
+  </script>
+</body>
+</html>
