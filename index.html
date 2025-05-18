@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>ClickUp Game</title>
+  <title>ClickUp Quiz</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -48,31 +48,39 @@
 </head>
 <body>
 
-  <div class="card" id="game">
-    <!-- El contenido del juego se inyecta por JavaScript -->
-  </div>
+  <div class="card" id="game"></div>
 
   <script>
     const questions = [
       {
-        question: '¿Para qué se usa ClickUp?',
-        options: ['Gestión de proyectos', 'Edición de videos', 'Diseño gráfico', 'Marketing digital'],
-        answer: 'Gestión de proyectos'
+        question: 'What is ClickUp used for?',
+        options: ['Project management', 'Video editing', 'Graphic design', 'Digital marketing'],
+        answer: 'Project management'
       },
       {
-        question: '¿Cuál de estas funcionalidades tiene ClickUp?',
-        options: ['Creación de documentos', 'Edición de código', 'Producción musical', 'Animación 3D'],
-        answer: 'Creación de documentos'
+        question: 'Which of these features does ClickUp offer?',
+        options: ['Document creation', 'Code editing', 'Music production', '3D animation'],
+        answer: 'Document creation'
       },
       {
-        question: '¿ClickUp permite gestionar tareas en estilo Kanban?',
-        options: ['Sí', 'No'],
-        answer: 'Sí'
+        question: 'Does ClickUp support Kanban task management?',
+        options: ['Yes', 'No'],
+        answer: 'Yes'
       },
       {
-        question: '¿Qué metodología soporta ClickUp?',
-        options: ['Scrum', 'Cascada', 'Agile', 'Todas las anteriores'],
-        answer: 'Todas las anteriores'
+        question: 'Which methodology is supported by ClickUp?',
+        options: ['Scrum', 'Waterfall', 'Agile', 'All of the above'],
+        answer: 'All of the above'
+      },
+      {
+        question: 'Can you integrate ClickUp with other tools like Slack and Google Drive?',
+        options: ['Yes', 'No'],
+        answer: 'Yes'
+      },
+      {
+        question: 'What type of teams use ClickUp the most?',
+        options: ['Remote teams', 'Only developers', 'Only designers', 'Only marketers'],
+        answer: 'Remote teams'
       }
     ];
 
@@ -86,7 +94,7 @@
       gameDiv.innerHTML = `
         <div class="question">${q.question}</div>
         <div class="options">
-          ${q.options.map((opt, i) => `<button class="button" onclick="handleAnswer('${opt}')">${opt}</button>`).join('')}
+          ${q.options.map(opt => `<button class="button" onclick="handleAnswer('${opt}')">${opt}</button>`).join('')}
         </div>
       `;
     }
@@ -105,9 +113,9 @@
 
     function renderResult() {
       gameDiv.innerHTML = `
-        <div class="question">Juego terminado 🎉</div>
-        <p class="score">Tu puntaje: ${score} / ${questions.length}</p>
-        <button class="button" onclick="resetGame()">Jugar de nuevo</button>
+        <div class="question">Quiz completed 🎉</div>
+        <p class="score">Your score: ${score} / ${questions.length}</p>
+        <button class="button" onclick="resetGame()">Play again</button>
       `;
     }
 
@@ -117,7 +125,6 @@
       renderQuestion();
     }
 
-    // Iniciar el juego
     renderQuestion();
   </script>
 </body>
